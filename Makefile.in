@@ -1,0 +1,31 @@
+CONFIGURE_OPTIONS = @OPTIONS@
+BUILDDIR = $(abspath @builddir@)
+SRC = $(abspath @srcdir@)
+
+.PHONY: sipXrouter sipXconfig sipXmedia sipXphones
+
+sipXrouter:
+	cd ${SRC}/$@; autoreconf -if
+	mkdir -p $@
+	cd $@; ${SRC}/$@/configure ${CONFIGURE_OPTIONS}
+	cd $@; make sipx
+	
+sipXconfig:
+	cd ${SRC}/$@; autoreconf -if
+	mkdir -p $@
+	cd $@; ${SRC}/$@/configure ${CONFIGURE_OPTIONS}
+	cd $@; make sipx
+
+sipXmedia:
+	cd ${SRC}/$@; autoreconf -if
+	mkdir -p $@
+	cd $@; ${SRC}/$@/configure ${CONFIGURE_OPTIONS}
+	cd $@; make sipx
+
+sipXphones:
+	cd ${SRC}/$@; autoreconf -if
+	mkdir -p $@
+	cd $@; ${SRC}/$@/configure ${CONFIGURE_OPTIONS}
+	cd $@; make sipx
+	
+sipx: sipXrouter sipXconfig sipXmedia sipXphones
