@@ -1,0 +1,12 @@
+[submodule "sipXrouter"]
+	path = sipXrouter
+	url = https://github.com/sipfoundrydev/sipXrouter
+[submodule "sipXconfig"]
+	path = sipXconfig
+	url = https://github.com/sipfoundrydev/sipXconfig
+[submodule "sipXmedia"]
+	path = sipXmedia
+	url = https://github.com/sipfoundrydev/sipXmedia
+[submodule "sipXphones"]
+	path = sipXphones
+	url = https://github.com/sipfoundrydev/sipXphones
