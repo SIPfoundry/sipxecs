@@ -9,7 +9,7 @@ sipXrouter:
 	mkdir -p $@
 	cd $@; ${SRC}/$@/configure ${CONFIGURE_OPTIONS}
 	cd $@; make sipx
-	
+
 sipXconfig:
 	cd ${SRC}/$@; autoreconf -if
 	mkdir -p $@
@@ -29,3 +29,19 @@ sipXphones:
 	cd $@; make sipx
 	
 sipx: sipXrouter sipXconfig sipXmedia sipXphones
+
+sipx.configure:
+	cd ${SRC}/sipXrouter; autoreconf -if
+	cd ${SRC}/sipXconfig; autoreconf -if
+	cd ${SRC}/sipXmedia; autoreconf -if
+	cd ${SRC}/sipXphones; autoreconf -if
+	mkdir -p sipXrouter; cd sipXrouter; ${SRC}/sipXrouter/configure ${CONFIGURE_OPTIONS}
+	mkdir -p sipXconfig; cd sipXconfig; ${SRC}/sipXconfig/configure ${CONFIGURE_OPTIONS}
+	mkdir -p sipXmedia; cd sipXmedia; ${SRC}/sipXmedia/configure ${CONFIGURE_OPTIONS}
+	mkdir -p sipXphones; cd sipXphones; ${SRC}/sipXphones/configure ${CONFIGURE_OPTIONS}
+	
+sipx.deps:
+	@cd sipXrouter; make --no-print-directory sipx.deps | grep -v sipx*
+	@cd sipXconfig; make --no-print-directory sipx.deps | grep -v sipx*
+	@cd sipXmedia; make --no-print-directory sipx.deps | grep -v sipx*
+	@cd sipXphones; make --no-print-directory sipx.deps | grep -v sipx*
